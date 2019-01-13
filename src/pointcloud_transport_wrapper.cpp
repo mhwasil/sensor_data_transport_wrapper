@@ -1,5 +1,5 @@
 #include <camera_ros_wrapper/pointcloud_transport_wrapper.h>
-#include <realsense_camera_wrapper/realsense_camera_device_wrapper.h>
+#include <realsense_camera_wrapper/realsense_camera.h>
 // include Santosh package https://github.com/sthoduka/zmq_pointcloud_transport/
 #include <camera_ros_wrapper/zmq_pointcloud_transport.h>
 #include <librealsense2/rs.hpp>
@@ -16,8 +16,7 @@
 
 //
 
-PointCloudTransportWrapper::PointCloudTransportWrapper( boost::shared_ptr<RealsenseCamera> realsense_interface):
-realsense_interface_(realsense_interface)
+PointCloudTransportWrapper::PointCloudTransportWrapper()
 {
     pub_pcl_ = nh_.advertise<sensor_msgs::PointCloud2>("cloud_output", 1);
 
@@ -41,7 +40,8 @@ PointCloudTransportWrapper::~PointCloudTransportWrapper()
 void PointCloudTransportWrapper::get_zmq_pointcloud(bool transform, std::string target_frame)
 {
     //PointCloudTransportWrapper::get_pointcloud();
-    realsense_interface_->get_pointcloud(cloud_);
+    std::chrono::milliseconds::rep time_stamp;
+    realsense_interface_->get_pointcloud(cloud_, time_stamp);
     if (transform)
     {
         std::cout<<"None";
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     bool transform = false;
 
     boost::shared_ptr<RealsenseCamera> realsense_interface = boost::make_shared<RealsenseCamera>(480,640);
-    PointCloudTransportWrapper pcl_wrapper(realsense_interface);
+    PointCloudTransportWrapper pcl_wrapper();
     //pcl_wrapper.get_zmq_pointcloud(transform, frame_id);
     ros::spin();
 }
