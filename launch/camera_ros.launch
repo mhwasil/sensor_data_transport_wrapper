@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<launch>
+	<include file="$(find camera_ros_wrapper)/launch/camera_ros_frames.launch">
+		<arg name="camera" value="realsense2" />
+	</include>
+
+	<node pkg="camera_ros_wrapper" name="pointcloud_transport" type="pointcloud_transport_wrapper" output="screen" launch-prefix="gdb -ex run --args" />
+
+
+
+</launch>
