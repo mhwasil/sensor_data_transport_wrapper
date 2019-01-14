@@ -23,19 +23,18 @@
 
 #include <realsense_camera_wrapper/realsense_camera.h>
 
-boost::shared_ptr<RealsenseCamera> realsense_interface_ = nullptr;
-
 class PointCloudTransportWrapper
 {
     public:
-        PointCloudTransportWrapper();
+        PointCloudTransportWrapper(ros::NodeHandle nh, boost::shared_ptr<RealsenseCamera> realsense_interface = nullptr);
         virtual ~PointCloudTransportWrapper();
         
 
     private:
         void get_pointcloud();
         ros::NodeHandle nh_;
-        //RealsenseCamera::Ptr device_;
+        //RealsenseCamera interface
+         boost::shared_ptr<RealsenseCamera> realsense_interface_;
 
     public:
         void get_ros_pointcloud(bool transform, std::string target_frame);
@@ -44,8 +43,7 @@ class PointCloudTransportWrapper
         void get_zmq_image();
     
     private:
-        //ptr_cloud cloud_;
-        pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_;
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_; 
         ros::Publisher pub_pcl_;
 
 };

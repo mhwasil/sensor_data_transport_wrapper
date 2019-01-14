@@ -21,43 +21,14 @@
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2_ros/static_transform_broadcaster.h>
 
-//
-
-void get_pointcloud()
-{
-
-
-}
-
-void get_ros_pointcloud()
-{
-    ZPT::ZMQPointCloudTransport zpt;
-    zpt.init(ZPT::SENDER);
-    usleep(100000);
-
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGB>);
-
-    pcl::PCLPointCloud2::Ptr pc(new pcl::PCLPointCloud2);
-    pcl::toPCLPointCloud2(*cloud, *pc);
-
-    for (int i = 0; i < 1000; i++)
-    {
-        zpt.publish(pc);
-        usleep(10000);
-    }
-}
-
-void get_transformed_pointcloud()
-{
-
-}
-
 int main(int argc, char *argv[]) 
 {
     ros::init(argc, argv, "realsense2_camera_node");
     ros::NodeHandle nh;
     ros::Publisher pub_pcl;
-    RealsenseCamera device(480, 640);
+    uint16_t width = 640;
+    uint16_t height = 480;
+    RealsenseCamera device(width, height);
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGB>);
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_new (new pcl::PointCloud<pcl::PointXYZRGB>);
     rs2::frame color;
@@ -79,7 +50,7 @@ int main(int argc, char *argv[])
         ptr_cloud cloud_new(new point_cloud);
         // device->get_data(cloud, color, depth);
         t_start = ros::Time::now().toSec();   
-        device.get_pointcloud(cloud_new, time_stamp);
+        device.get_pointcloud(cloud_new);
         t_end = ros::Time::now().toSec();   
         ROS_WARN_STREAM("time required for calculating point cloud " << (t_end - t_start));
         // Publish pcl
