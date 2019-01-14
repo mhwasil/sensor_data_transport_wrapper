@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>camera_ros_wrapper</name>
+  <name>sensor_data_transport_wrapper</name>
   <version>0.0.0</version>
-  <description>The camera_ros_wrapper package</description>
+  <description>The sensor_data_transport_wrapper package</description>
 
   <maintainer email="mwasil@outlook.co.id">Mohammad Wasil</maintainer>
 

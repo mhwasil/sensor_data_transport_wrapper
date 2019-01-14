@@ -1,4 +1,4 @@
-#include <camera_ros_wrapper/zmq_pointcloud_transport.h>
+#include <sensor_data_transport_wrapper/zmq_pointcloud_transport.h>
 #include <pcl/PCLPointCloud2.h>
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>

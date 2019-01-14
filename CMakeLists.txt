@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(camera_ros_wrapper)
+project(sensor_data_transport_wrapper)
 
 add_compile_options(-std=c++11
                     -O3

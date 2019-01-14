@@ -1,6 +1,6 @@
 #include <realsense_camera_wrapper/realsense_camera.h>
 // include Santosh package https://github.com/sthoduka/zmq_pointcloud_transport/
-#include <camera_ros_wrapper/zmq_pointcloud_transport.h>
+#include <sensor_data_transport_wrapper/zmq_pointcloud_transport.h>
 #include <librealsense2/rs.hpp>
 #include <ros/ros.h>
 #include <iostream>
