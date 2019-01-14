@@ -1,4 +1,4 @@
-#include <realsense_camera_wrapper/realsense_camera_device_wrapper.h>
+#include <realsense_camera_wrapper/realsense_camera.h>
 // include Santosh package https://github.com/sthoduka/zmq_pointcloud_transport/
 #include <camera_ros_wrapper/zmq_pointcloud_transport.h>
 #include <librealsense2/rs.hpp>
@@ -75,10 +75,11 @@ int main(int argc, char *argv[])
 
     while(nh.ok())
     {
+        std::chrono::milliseconds::rep time_stamp;
         ptr_cloud cloud_new(new point_cloud);
         // device->get_data(cloud, color, depth);
         t_start = ros::Time::now().toSec();   
-        device.get_pointcloud(cloud_new);
+        device.get_pointcloud(cloud_new, time_stamp);
         t_end = ros::Time::now().toSec();   
         ROS_WARN_STREAM("time required for calculating point cloud " << (t_end - t_start));
         // Publish pcl
