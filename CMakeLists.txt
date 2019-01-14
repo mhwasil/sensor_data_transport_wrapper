@@ -42,28 +42,19 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
-#add_library(${PROJECT_NAME}
-#  src/${PROJECT_NAME}/realsense_camera.cpp
-#)
-
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(realsense2_camera_node 
-  src/realsense2_camera_node.cpp
+add_executable(pointcloud_transport_wrapper_node_test
+  src/pointcloud_transport_wrapper_node_test.cpp
 )
 
-#add_executable(${PROJECT_NAME}_node_2 src/${PROJECT_NAME}/realsense_camera_node_2.cpp)
-
 ## Specify libraries to link a library or executable target against
-target_link_libraries(realsense2_camera_node
+target_link_libraries(pointcloud_transport_wrapper_node_test
   ${OpenCV_LIBRARIES}
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
   ${Boost_LIBRARIES}
-  #${PROJECT_NAME}
-  #${ZeroMQ_LIBRARY}
   zmq
 )
 
